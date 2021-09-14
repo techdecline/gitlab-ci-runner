@@ -6,7 +6,7 @@ variable "gitlab_vm_name" {
 variable "key_vault_id" {
   type        = string
   description = "Key Vault ID for the SSH Keys"
-  default = null
+  default = ""
 }
 
 variable "resource_group_name" {
@@ -38,5 +38,5 @@ variable "gitlab_url" {
 variable "ssh_public_key" {
   type = string
   description = "Existing SSH Public Key for authentication"
-  default = null
+  default = ""
 }
