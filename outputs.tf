@@ -6,7 +6,6 @@ output "gitlab_vm_ip_address" {
   value = azurerm_network_interface.nic-gitlab.private_ip_address
 }
 
-
 output "secrets" {
   value = {
     secret_name_public_key  = azurerm_key_vault_secret.secret-gitlab-pub[0].name
