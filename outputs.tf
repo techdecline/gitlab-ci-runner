@@ -12,3 +12,7 @@ output "secrets" {
     secret_name_private_key = azurerm_key_vault_secret.secret-gitlab-priv[0].name
   }
 }
+
+output "gitlab_url" {
+  value = var.gitlab_url
+}
