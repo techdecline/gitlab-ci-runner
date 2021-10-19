@@ -40,3 +40,15 @@ variable "ssh_public_key" {
   description = "Existing SSH Public Key for authentication"
   default = ""
 }
+
+variable "dns_label" {
+  type        = string
+  description = "DNS Name for the Public IP"
+  default     = ""
+}
+
+variable "create_public_ip" {
+  type        = bool
+  default     = false
+  description = "Create a public IP for the GitLab Virtual Machine"
+}
