@@ -1,7 +1,7 @@
 resource "azurerm_public_ip" "pip-gitlab" {
   count               = var.create_public_ip ? 1 : 0
   name                = "pip-${local.gitlab_vm_name}"
-  resource_group_name = var.resource_group_name
+  resource_group_name = data.azurerm_resource_group.rg-gitlab.name
   location            = data.azurerm_resource_group.rg-gitlab.location
   allocation_method   = "Static"
   sku                 = "standard"
