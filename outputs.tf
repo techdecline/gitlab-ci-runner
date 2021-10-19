@@ -3,7 +3,7 @@ output "gitlab_vm_name" {
 }
 
 output "gitlab_vm_ip_address" {
-  value = azurerm_network_interface.nic-gitlab.private_ip_address
+  value = var.create_public_ip ? azurerm_public_ip.pip-gitlab[0].ip_address : azurerm_network_interface.nic-gitlab.private_ip_address
 }
 
 output "secrets" {
