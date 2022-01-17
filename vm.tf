@@ -20,7 +20,7 @@ resource "azurerm_linux_virtual_machine" "vm-gitlab" {
     offer     = "debian-10"
     sku       = "10-gen2"
     version   = "latest"
-  }                                                                        
+  }
 }
 
 resource "azurerm_virtual_machine_extension" "vmext" {
@@ -30,7 +30,7 @@ resource "azurerm_virtual_machine_extension" "vmext" {
   publisher            = "Microsoft.Azure.Extensions"
   type                 = "CustomScript"
   type_handler_version = "2.0"
-  provisioner "local-exec" {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+  provisioner "local-exec" {
     command = "sleep 120"
   }
   protected_settings = <<SETTINGS
@@ -38,4 +38,7 @@ resource "azurerm_virtual_machine_extension" "vmext" {
       "script": "${base64encode(data.template_file.init-gitlab.rendered)}"
     }
 SETTINGS
+  lifecycle {
+    ignore_changes = [protected_settings, tags]
+  }
 }
