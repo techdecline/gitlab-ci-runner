@@ -35,7 +35,7 @@ gitlab-runner register \
   --executor "docker" \
   --docker-image "docker:20.10.13" \
   --docker-privileged \
-  --docker-volumes "/certs/client"
+  --docker-volumes "/certs/client" \
   --description "docker-runner" \
   --tag-list "docker,azure" \
   --run-untagged="true" \
