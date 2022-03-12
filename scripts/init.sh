@@ -39,3 +39,31 @@ gitlab-runner register \
   --run-untagged="true" \
   --locked="false" \
   --access-level="not_protected"
+
+# enable Docker-In-Docker see https://brainfood.xyz/post/20191116-setup-gitlab-runner-with-docker-in-docker/
+cat << EOF | patch /etc/gitlab-runner/config.toml
+--- /etc/gitlab-runner/config.toml
++++ /etc/gitlab-runner/config.toml
+@@ -9,15 +9,16 @@
+   url = "https://gitlab.com/"
+   token = "xyzXYZxyzXYZ"
+   executor = "docker"
++  environment = ["DOCKER_TLS_CERTDIR=/certs","DOCKER_DRIVER=overlay2"]
+   [runners.custom_build_dir]
+   [runners.docker]
+     tls_verify = false
+     image = "alpine:latest"
+-    privileged = false
++    privileged = true
+     disable_entrypoint_overwrite = false
+     oom_kill_disable = false
+     disable_cache = false
+-    volumes = ["/cache"]
++    volumes = ["/certs/client", "/cache"]
+     shm_size = 0
+   [runners.cache]
+     [runners.cache.s3]
+EOF
+
+systemctl enable docker gitlab-runner
+systemctl restart docker gitlab-runner
