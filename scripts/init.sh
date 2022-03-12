@@ -33,7 +33,7 @@ gitlab-runner register \
   --url "$gitlab_url" \
   --registration-token "$registration_token" \
   --executor "docker" \
-  --docker-image 20.10.13-dind \
+  --docker-image "docker:20.10.13" \
   --docker-privileged \
   --docker-volumes "/certs/client"
   --description "docker-runner" \
