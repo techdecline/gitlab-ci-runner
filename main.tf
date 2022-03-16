@@ -23,7 +23,8 @@ data "azurerm_resource_group" "rg-gitlab" {
 data "template_file" "init-gitlab" {
   template = file("${path.module}/scripts/init.sh")
   vars = {
-    REGISTRATION_TOKEN    = var.registration_token
-    GITLAB_URL            = var.gitlab_url
+    REGISTRATION_TOKEN = var.registration_token
+    GITLAB_URL         = var.gitlab_url
+    RUNNER_DESCRIPTION = local.gitlab_vm_name
   }
 }

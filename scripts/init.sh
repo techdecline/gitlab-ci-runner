@@ -2,6 +2,7 @@
 # Installs GitLab Runner on Debian
 export registration_token=${REGISTRATION_TOKEN}
 export gitlab_url=${GITLAB_URL}
+export runner_description=${RUNNER_DESCRIPTION}
 
 # Install Docker (https://docs.docker.com/engine/install/debian/)
 apt-get update
@@ -36,7 +37,10 @@ gitlab-runner register \
   --docker-image "docker:20.10.13" \
   --docker-privileged \
   --docker-volumes "/certs/client" \
-  --description "docker-runner" \
+  --docker-volumes "/cache" \
+  --docker-volumes "/var/run/docker.sock:/var/run/docker.sock" \
+  --docker-disable-cache="false" \
+  --description "$runner_description" \
   --tag-list "docker,azure" \
   --run-untagged="true" \
   --locked="false" \
