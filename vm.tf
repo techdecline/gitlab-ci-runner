@@ -21,6 +21,9 @@ resource "azurerm_linux_virtual_machine" "vm-gitlab" {
     sku       = "10-gen2"
     version   = "latest"
   }
+  lifecycle {
+    ignore_changes = [protected_settings, tags, identity]
+  }
 }
 
 resource "azurerm_virtual_machine_extension" "vmext" {
@@ -39,6 +42,6 @@ resource "azurerm_virtual_machine_extension" "vmext" {
     }
 SETTINGS
   lifecycle {
-    ignore_changes = [protected_settings, tags, identity]
+    ignore_changes = [protected_settings, tags]
   }
 }
